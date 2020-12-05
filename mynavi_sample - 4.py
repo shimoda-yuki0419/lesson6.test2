@@ -54,10 +54,7 @@ def main():
             elem_contents = driver.find_elements_by_class_name("cassetteRecruit__mainM")
             for elem_name,elem_characteristic,elem_content in zip(elem_names,elem_characteristics,elem_contents):
                 name_list = [elem_name.text,elem_characteristic.text,elem_content.text]
-                for elem_name_one,elem_characteristic_one,elem_content_one in zip(name_list[0],name_list[1],name_list[2]):
-                    elem_name_one = driver.find_element_by_class_name("cassetteRecruit__name")
-                    elem_characteristic_one = driver.find_element_by_class_name("cassetteRecruit__copy")
-                    elem_content_one = driver.find_element_by_class_name("cassetteRecruit__mainM")
+                
 
                 # 終わるまで処理
                     # next_page=driver.find_elements_by_class_name("iconFont--arrowLeft")
@@ -69,17 +66,14 @@ def main():
                     #     break
             
 
-                    df = pd.DataFrame({
-                            '会社名':[elem_name_one],
-                            '特徴':[elem_characteristic_one],
-                            '内容':[elem_content_one]}
-                            )
+                df = pd.DataFrame({
+                        '会社名':[elem_name.text],
+                        '特徴':[elem_characteristic.text],
+                        '内容':[elem_content.text]}
+                        )
         
     
-                    with open('new.csv','a',newline="") as f:
-                            writer = csv.writer(f)
-                            w = writer.writerows(df)
-                            print(w)
+                df.to_csv("mynavi.csv")
     
         
 
